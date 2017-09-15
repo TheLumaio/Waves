@@ -34,6 +34,13 @@ function player:update(dt)
 end
 
 function player:draw()
+	
+	lg.setLineWidth(2)
+	lg.setColor(0, 0, 0, 100)
+	lg.line(self.center.x+6, self.center.y-3, self.center.x+6, self.center.y+800)
+	lg.setColor(100, 50, 10)
+	lg.line(self.center.x+3, self.center.y-3, self.center.x+3, self.center.y+800)
+	
 	lg.setColor(255, 255, 255)
 	self.to_rotate = math.atan2(water.waves[self.position-math.floor(self.width/2)].x - water.waves[self.position+self.width].x, water.intensity*water.waves[self.position-math.floor(self.width/2)].y - water.intensity*water.waves[self.position+self.width].y) + math.rad(90)
 	local dif = self.to_rotate-self.rotate
@@ -43,6 +50,9 @@ function player:draw()
 	lg.push()
 	lg.translate(water.waves[self.position].x, 500-water.intensity*self.y+2)
 	lg.rotate(self.rotate)
+	lg.setColor(0, 0, 0, 100)
+	lg.draw(self.image, -math.floor(self.image:getWidth()/2)+3, -self.image:getHeight()-2)
+	lg.setColor(255, 255, 255)
 	lg.draw(self.image, -math.floor(self.image:getWidth()/2), -self.image:getHeight())
 	lg.pop()
 	self:drawCannons()

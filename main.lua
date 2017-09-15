@@ -53,9 +53,9 @@ function love.draw()
 		lg.print("wave_intensity: " .. water.intensity, 0, 84)
 	end
 	
+	water:draw()
 	encounter:draw()
 	player:draw()
-	water:draw()
 	updateAndDrawProjectiles()
 	
 	player:overlay()

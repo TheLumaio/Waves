@@ -29,9 +29,24 @@ function blackbeard:update(dt)
 	self.rotate = lerp(self.rotate, self.to_rotate+math.cos(3*time)*0.05, self.lerpspeed)
 	self.speed = lerp(self.speed, self.to_speed, 0.2)
 	self.y = lerp(self.y, self.to_y, 0.3)
+	
+	
+	self.center = {
+		x = water.waves[self.position].x,
+		y = 500-water.intensity*self.y+2,
+		r = self.rotate
+	}
+	
 end
 
 function blackbeard:draw()
+	
+	lg.setLineWidth(2)
+	lg.setColor(0, 0, 0, 100)
+	lg.line(self.x+6, self.center.y-3, self.x+6, self.center.y+800)
+	lg.setColor(100, 50, 10)
+	lg.line(self.x+3, self.center.y-3, self.x+3, self.center.y+800)
+	
 	lg.setColor(255, 255, 255)
 	self.to_rotate = math.atan2(water.waves[self.position-math.floor(self.width/2)].x - water.waves[self.position+self.width].x, water.intensity*water.waves[self.position-math.floor(self.width/2)].y - water.intensity*water.waves[self.position+self.width].y) + math.rad(90)
 	local dif = self.to_rotate-self.rotate
@@ -40,10 +55,14 @@ function blackbeard:draw()
 	lg.push()
 	lg.translate(self.x, 500-water.intensity*self.y+2)
 	lg.rotate(self.rotate)
+	lg.setColor(0, 0, 0, 100)
+	lg.draw(self.image, -math.floor(self.image:getWidth()/2)+3, -self.image:getHeight()-2)
+	lg.setColor(255, 255, 255)
 	lg.draw(self.image, -math.floor(self.image:getWidth()/2), -self.image:getHeight())
 	lg.pop()
 	
 	self:drawCannons()
+	
 end
 
 return blackbeard

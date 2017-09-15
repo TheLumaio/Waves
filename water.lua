@@ -50,9 +50,21 @@ function water:draw()
 				lg.rectangle("fill", v.x, 500-self.intensity*v.y, 5, h)
 			end
 		end
-		lg.setColor(150, 190, 200)
+		lg.setLineWidth(4)
 		if i > 1 then
-			lg.setLineWidth(4)
+			lg.setColor(0, 0, 0, 100)
+			lg.line(v.x+3, 500-self.intensity*v.y-4, self.waves[i-1].x+3, 500-self.intensity*self.waves[i-1].y-4)
+			
+			lg.setColor(0, 0, 0, 100)
+			lg.line(v.x+3, 550-self.intensity*v.y-1, self.waves[i-1].x+3, 550-self.intensity*self.waves[i-1].y-1)
+			
+			lg.setColor(0, 0, 0, 100)
+			lg.line(v.x+3, 600-self.intensity*v.y-1, self.waves[i-1].x+3, 600-self.intensity*self.waves[i-1].y-1)
+			
+			lg.setColor(0, 0, 0, 100)
+			lg.line(v.x+3, 650-self.intensity*v.y-1, self.waves[i-1].x+3, 650-self.intensity*self.waves[i-1].y-1)
+			
+			lg.setColor(150, 190, 200)
 			lg.line(v.x, 500-self.intensity*v.y, self.waves[i-1].x, 500-self.intensity*self.waves[i-1].y)
 		end
 	end
