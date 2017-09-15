@@ -32,15 +32,24 @@ function projectile:updateAndDraw(dt)
 	
 	lg.setColor(255, 255, 255)
 	lg.draw(cannonball, self.x, self.y, self.angle*time, 1, 1, 5, 5)
-	--lg.circle("fill", self.x, self.y, 3)
 	
 end
 
 local projectiles = {}
 
 function updateAndDrawProjectiles()
-	for i,v in ipairs(projectiles) do
+	for i=#projectiles,1,-1 do
+		local v = projectiles[i]
+		
 		v:updateAndDraw(love.timer.getDelta())
+		
+		for j,k in ipairs(water.waves) do
+			if v.x > k.x and v.x < k.x + 5 and v.y > 500-water.intensity*k.y then
+				table.remove(projectiles, i)
+				createSplash(k.x+3, 500-water.intensity*k.y, j)
+			end
+		end
+		
 	end
 end
 

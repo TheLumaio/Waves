@@ -11,6 +11,7 @@ lg.setDefaultFilter("nearest", "nearest")
 --[[global]] debug = false
 
 require "mathutils"
+require "splash"
 require "projectile"
 
 --[[global]] timeofday = require "timeofday"
@@ -23,6 +24,7 @@ require "projectile"
 function love.load()
 	water:remap()
 	player:init()
+	initSplashQuads()
 end
 
 function love.update(dt)
@@ -52,8 +54,9 @@ function love.draw()
 	
 	encounter:draw()
 	player:draw()
-	water:draw()
+	updateAndDrawSplashes()
 	updateAndDrawProjectiles()
+	water:draw()
 	
 	player:overlay()
 end

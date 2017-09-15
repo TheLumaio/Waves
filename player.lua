@@ -3,7 +3,8 @@ local player = Ship(math.floor(water.width/1.2))
 
 function player:init()
 	self:loadCannonMap("assets/player_cm.png")
-	self.reload_timer = 5
+	self.reload_speed = 0
+	self.reload_timer = self.reload_speed
 	self.reload = false
 	self.center = {
 		x = 0,
@@ -21,7 +22,7 @@ function player:update(dt)
 		self.reload_timer = self.reload_timer - dt
 		if self.reload_timer <= 0 then
 			self.reload = false
-			self.reload_timer = 5
+			self.reload_timer = self.reload_speed
 		end
 	end
 	
