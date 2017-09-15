@@ -14,21 +14,21 @@ local timeofday = {
 		{50, 60, 80}
 	},
 	current = {
-		{0, 80, 200},
-		{0, 60, 160},
-		{0, 30, 80},
+		{255, 255, 200},
+		{255, 200, 50},
+		{274, 118, 27},
 		{255, 255, 25}
 	},
 	sun = {
 		{255, 255, 25},
-		y = 900
+		y = 200
 	},
 	moon = {
 		{200, 230, 255},
-		y = 200
+		y = -500
 	},
 	tod = "wait",
-	next = "today",
+	next = "tonight",
 	rotation = 0
 }
 
@@ -88,6 +88,20 @@ function timeofday:draw()
 	lg.rectangle("fill", 0, 350, 800, 600)
 	
 	-- sun
+	
+	lg.setLineWidth(2)
+	lg.setColor(0, 0, 0, 100)
+	lg.line(lg.getWidth()/2+3, self.sun.y, lg.getWidth()/2+3, self.sun.y+800)
+	lg.setColor(100, 50, 10)
+	lg.line(lg.getWidth()/2, self.sun.y, lg.getWidth()/2, self.sun.y+800)
+	
+	lg.setColor(0, 0, 0, 100)
+	lg.push()
+	lg.translate(400+5, self.sun.y-5)
+	lg.rotate(self.rotation)
+	lg.circle("fill", 0, 0, 100, 7)
+	lg.pop()
+	
 	lg.setColor(self.sun[1])
 	lg.push()
 	lg.translate(400, self.sun.y)
@@ -96,6 +110,14 @@ function timeofday:draw()
 	lg.pop()
 	
 	-- moon
+	
+	lg.setColor(0, 0, 0, 100)
+	lg.push()
+	lg.translate(400+5, self.moon.y-5)
+	lg.rotate(self.rotation)
+	lg.circle("fill", 0, 0, 100, 7)
+	lg.pop()
+	
 	lg.setColor(self.moon[1])
 	lg.push()
 	lg.translate(400, self.moon.y)
