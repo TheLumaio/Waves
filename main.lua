@@ -14,6 +14,8 @@ function cerp(a,b,t) local f=(1-math.cos(t*math.pi))*.5 return a*(1-f)+b*f end
 --[[global]] time = 0
 --[[global]] debug = false
 
+require "projectile"
+
 --[[global]] timeofday = require "timeofday"
 --[[global]] encounter = require "encounter"
 
@@ -54,6 +56,9 @@ function love.draw()
 	encounter:draw()
 	player:draw()
 	water:draw()
+	updateAndDrawProjectiles()
+	
+	player:overlay()
 	
 	-- lg.setColor(255, 255, 255)
 	-- lg.setLineWidth(1)
@@ -71,6 +76,10 @@ function love.draw()
 	-- local length = math.min(125, math.dist(shipcenter.x, shipcenter.y, mx, my)-50)
 	-- if length < 25 then length = 25 end
 	-- lg.line(shipcenter.x+firedx*50, shipcenter.y+firedy*50, shipcenter.x+firedx*length+firedx*50, shipcenter.y+firedy*length+firedy*50)s
+end
+
+function love.mousepressed(x, y, b)
+	player:mousepressed(x, y, b)
 end
 
 function love.keypressed(key)
