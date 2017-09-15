@@ -48,7 +48,6 @@ function timeofday:update(dt)
 end
 
 function timeofday:draw()
-	-- daytime
 	
 	for i,v in ipairs(self.current) do
 		if self.tod == "today" then
@@ -104,12 +103,6 @@ function timeofday:draw()
 	lg.pop()
 	
 	lg.setColor(0, 0, 0)
-	-- lg.print(self.time*10)
-	-- lg.print(self.current[1][1] .. " : " .. self.current[1][2] .. " : " .. self.current[1][3], 0, 12)
-	-- lg.print(self.day[1][1] .. " : " .. self.day[1][2] .. " : " .. self.day[1][3], 0, 22)
-	-- lg.print(self.tod, 0, 34)
-	
-	-- nighttime
 	
 end
 

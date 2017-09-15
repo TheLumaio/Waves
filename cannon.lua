@@ -2,27 +2,6 @@
 local cannon_base_img = lg.newImage("assets/cannon_base.png")
 local cannon_pipe_img = lg.newImage("assets/cannon_pipe.png")
 
--- shamelessly stolen from stackoverflow
-local function rotatepoint(cx, cy, x, y, angle)
-	local p = {
-		x = x,
-		y = y
-	}
-	local s = math.sin(angle);
-	local c = math.cos(angle);
-
-	p.x = p.x - cx;
-	p.y = p.y - cy;
-
-	local xnew = p.x * c - p.y * s;
-	local ynew = p.x * s + p.y * c;
-
-	p.x = xnew + cx;
-	p.y = ynew + cy;
-	
-	return p
-end
-
 local cannon = {}
 cannon.__index = cannon
 setmetatable(cannon, {

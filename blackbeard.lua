@@ -2,9 +2,6 @@ local Ship = require "ship"
 
 local blackbeard = Ship(100)
 
-function blackbeard:init()
-end
-
 function blackbeard:encounter()
 	self.width = 11
 	self.position_timer = 0

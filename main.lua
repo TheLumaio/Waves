@@ -7,13 +7,10 @@ lg.setLineWidth(4)
 
 lg.setDefaultFilter("nearest", "nearest")
 
-function lerp(a,b,t) return (1-t)*a + t*b end
-function math.dist(x1,y1, x2,y2) return ((x2-x1)^2+(y2-y1)^2)^0.5 end
-function cerp(a,b,t) local f=(1-math.cos(t*math.pi))*.5 return a*(1-f)+b*f end
-
 --[[global]] time = 0
 --[[global]] debug = false
 
+require "mathutils"
 require "projectile"
 
 --[[global]] timeofday = require "timeofday"
@@ -59,23 +56,6 @@ function love.draw()
 	updateAndDrawProjectiles()
 	
 	player:overlay()
-	
-	-- lg.setColor(255, 255, 255)
-	-- lg.setLineWidth(1)
-	-- local shipcenter = {
-	-- 	x = water[ship.position+1].x,
-	-- 	y = 500-wave_intensity*ship.y
-	-- }
-	-- local mx, my = love.mouse.getPosition()
-	-- local fireangle = math.atan2(my - shipcenter.y, mx - shipcenter.x)
-	-- if math.deg(fireangle) > -10 and math.deg(fireangle) < 90 then fireangle = math.rad(-10)
-	-- elseif math.deg(fireangle) < -170 or math.deg(fireangle) > 90 then fireangle = math.rad(-170) end
-	-- if math.deg(fireangle) == 90 then fireangle = math.rad(-10) end
-	-- local firedx = math.cos(fireangle)
-	-- local firedy = math.sin(fireangle)
-	-- local length = math.min(125, math.dist(shipcenter.x, shipcenter.y, mx, my)-50)
-	-- if length < 25 then length = 25 end
-	-- lg.line(shipcenter.x+firedx*50, shipcenter.y+firedy*50, shipcenter.x+firedx*length+firedx*50, shipcenter.y+firedy*length+firedy*50)s
 end
 
 function love.mousepressed(x, y, b)
