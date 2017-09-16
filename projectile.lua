@@ -51,11 +51,13 @@ function updateAndDrawProjectiles()
 		end
 		
 	end
+	updateAndDrawPuffs()
 end
 
 function createProjectiles(offset, angle, cannons)
 	for i,v in ipairs(cannons) do
 		local tip = v:getTip(offset.r)
 		table.insert(projectiles, projectile(offset.x+tip.x, offset.y+tip.y, angle, math.random(450,500), 20))
+		-- createPuff(offset.x+tip.x, offset.y+tip.y, angle-math.rad(90))
 	end
 end

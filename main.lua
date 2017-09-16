@@ -13,12 +13,14 @@ lg.setDefaultFilter("nearest", "nearest")
 require "mathutils"
 require "splash"
 require "projectile"
+require "puff"
 
 --[[global]] timeofday = require "timeofday"
 --[[global]] encounter = require "encounter"
 
 --[[global]] water = require "water"
 --[[global]] blackbeard = require "blackbeard"
+--[[global]] dutchman = require "dutchman"
 --[[global]] player = require "player"
 
 local canvas = lg.newCanvas(lg.getWidth()+40, lg.getHeight()+40)
@@ -28,6 +30,7 @@ function love.load()
 	water:remap()
 	player:init()
 	initSplashQuads()
+	initPuffQuads()
 end
 
 function love.update(dt)
@@ -98,7 +101,7 @@ function love.keypressed(key)
 	end
 	
 	if key == "space" and not encounter.in_encounter then
-		encounter:startEncounter(blackbeard)
+		encounter:startEncounter(dutchman)
 	end
 end
 

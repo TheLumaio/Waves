@@ -46,6 +46,8 @@ function player:draw()
 	lg.rotate(self.rotate)
 	lg.draw(self.image, -math.floor(self.image:getWidth()/2), -self.image:getHeight())
 	lg.pop()
+	
+	lg.setColor(255, 255, 255)
 	self:drawCannons()
 	
 	if encounter.in_encounter then

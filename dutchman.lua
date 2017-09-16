@@ -1,22 +1,27 @@
 local Ship = require "ship"
 
-local blackbeard = Ship(100)
+local dutchman = Ship(100)
 
-function blackbeard:encounter()
+function dutchman:encounter()
 	self.width = 11
 	self.position_timer = 0
 	self.startx = water.waves[self.position].x
 	self.x = water.waves[self.position].x
-	self.image = lg.newImage("assets/blackbeard.png")
+	self.image = lg.newImage("assets/flyingdutchman.png")
 	
-	self:loadCannonMap("assets/blackbeard_cm.png")
+	self:loadCannonMap("assets/flyingdutchman_cm.png")
 	
+	-- move to night time
+	if timeofday.tod ~= "wait" and timeofday.next ~= "today" then
+		timeofday.tod = "tonight"
+	end
+		
 	return {
-		text = {{255, 255, 255}, "The dread pirate", {20, 20, 20}, " Black Beard"}
+		text = {{45, 45, 45}, "The Flying Dutchman"}
 	}
 end
 
-function blackbeard:update(dt)
+function dutchman:update(dt)
 	self.position_timer = self.position_timer + dt/5
 	if self.position_timer > 1 then self.position_timer = 1 end
 	
@@ -26,9 +31,12 @@ function blackbeard:update(dt)
 	self.rotate = lerp(self.rotate, self.to_rotate+math.cos(3*time)*0.05, self.lerpspeed)
 	self.speed = lerp(self.speed, self.to_speed, 0.2)
 	self.y = lerp(self.y, self.to_y, 0.3)
+	
+	timeofday.next = "wait"
+	
 end
 
-function blackbeard:draw()
+function dutchman:draw()
 	lg.setColor(255, 255, 255)
 	self.to_rotate = math.atan2(water.waves[self.position-math.floor(self.width/2)].x - water.waves[self.position+self.width].x, water.intensity*water.waves[self.position-math.floor(self.width/2)].y - water.intensity*water.waves[self.position+self.width].y) + math.rad(90)
 	local dif = self.to_rotate-self.rotate
@@ -40,8 +48,8 @@ function blackbeard:draw()
 	lg.draw(self.image, -math.floor(self.image:getWidth()/2), -self.image:getHeight())
 	lg.pop()
 	
-	lg.setColor(255, 255, 255)
+	lg.setColor(100, 100, 100)
 	self:drawCannons()
 end
 
-return blackbeard
+return dutchman
