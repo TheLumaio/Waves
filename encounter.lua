@@ -62,6 +62,7 @@ function encounter:draw()
 	if not self.in_encounter then return end
 	self.boss:draw()
 	
+	lg.setColor(255, 255, 255)
 	local f = lg.getFont()
 	lg.setFont(self.font)
 	lg.print({{0, 0, 0}, "You have encountered"}, 400-self.font:getWidth("You have encountered")/2+1, self.y+1)
