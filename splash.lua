@@ -34,7 +34,6 @@ function splash:updateAndDraw()
 		end
 	end
 	
-	self.x = water.waves[self.wave].x+3
 	self.y = 500-water.intensity*water.waves[self.wave].y
 	
 	lg.setColor(150, 190, 200)

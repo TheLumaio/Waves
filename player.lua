@@ -62,6 +62,7 @@ end
 
 function player:mousepressed(x, y, b)
 	if encounter.in_encounter and not self.reload then
+		screenShake()
 		createProjectiles(self.center, self.fireangle-math.rad(90), self.cannons)
 		self.reload = true
 	end

@@ -21,6 +21,9 @@ require "projectile"
 --[[global]] blackbeard = require "blackbeard"
 --[[global]] player = require "player"
 
+local canvas = lg.newCanvas(lg.getWidth()+40, lg.getHeight()+40)
+local shake_duration = 0
+
 function love.load()
 	water:remap()
 	player:init()
@@ -35,9 +38,14 @@ function love.update(dt)
 	encounter:update(dt)
 	player:update(dt)
 	
+	if shake_duration > 0 then
+		shake_duration = shake_duration - dt
+	end
+	
 end
 
 function love.draw()
+	lg.setCanvas(canvas)
 	timeofday:draw()
 	
 	if debug then
@@ -59,6 +67,18 @@ function love.draw()
 	water:draw()
 	
 	player:overlay()
+	
+	lg.setCanvas()
+	lg.clear(timeofday.current[1])
+	lg.setColor(255, 255, 255)
+	
+	if shake_duration > 0 then
+		lg.translate(math.random(-20,20)*(shake_duration/0.4), math.random(-20,20)*(shake_duration/0.4))
+	else
+		lg.translate(0, 0)
+	end
+	lg.draw(canvas, -20, -20)
+	
 end
 
 function love.mousepressed(x, y, b)
@@ -73,4 +93,8 @@ function love.keypressed(key)
 	if key == "space" and not encounter.in_encounter then
 		encounter:startEncounter(blackbeard)
 	end
+end
+
+function screenShake()
+	shake_duration = 0.4
 end

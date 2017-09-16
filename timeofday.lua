@@ -80,11 +80,11 @@ function timeofday:draw()
 	end
 	
 	lg.setColor(self.current[1])
-	lg.rectangle("fill", 0, 0, 800, 600)
+	lg.rectangle("fill", 0, 0, 1000, 600)
 	lg.setColor(self.current[2])
-	lg.rectangle("fill", 0, 200, 800, 600)
+	lg.rectangle("fill", 0, 200, 1000, 600)
 	lg.setColor(self.current[3])
-	lg.rectangle("fill", 0, 350, 800, 600)
+	lg.rectangle("fill", 0, 350, 1000, 600)
 	
 	-- sun
 	lg.setColor(self.sun[1])
