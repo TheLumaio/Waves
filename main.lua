@@ -100,6 +100,13 @@ function love.keypressed(key)
 		debug = not debug
 	end
 	
+	if key == "f" then
+		timeofday.todo = "tonight"
+		timeofday.next = "wait"
+		timeofday.tod = "riseset"
+		timeofday.time = 0
+	end
+	
 	if key == "space" and not encounter.in_encounter then
 		encounter:startEncounter(dutchman)
 	end

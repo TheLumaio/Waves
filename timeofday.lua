@@ -27,20 +27,22 @@ local timeofday = {
 		{200, 230, 255},
 		y = 200
 	},
-	tod = "wait",
+	todo = "wait",
 	next = "today",
+	tod = "night",
 	rotation = 0
 }
 
 function timeofday:update(dt)
 	self.rotation = self.rotation + dt
-	if self.tod ~= "wait" then
+	if self.todo ~= "wait" then
 		if self.time < 1 then self.time = self.time + dt/10 end
 		if self.time > 1 then self.time = 1 end
+		self.tod = "riseset"
 	else
 		self.time = self.time + dt/5
 		if self.time > 1 then
-			self.tod = self.next
+			self.todo = self.next
 			self.time = 0
 		end
 	end
@@ -49,31 +51,37 @@ end
 
 function timeofday:draw()
 	
+	if self.todo == "today" then
+		self.sun.y = lerp(900, 200, self.time)
+		self.moon.y = lerp(200, -500, self.time)
+	elseif self.todo == "tonight" then
+		self.sun.y = lerp(200, 900, self.time)
+		self.moon.y = lerp(-500, 200, self.time)
+	end
+	
 	for i,v in ipairs(self.current) do
-		if self.tod == "today" then
+		if self.todo == "today" then
 			v[1] = lerp(self.night[i][1], self.day[i][1], self.time)
 			v[2] = lerp(self.night[i][2], self.day[i][2], self.time)
 			v[3] = lerp(self.night[i][3], self.day[i][3], self.time)
-			self.sun.y = lerp(900, 200, self.time)
-			self.moon.y = lerp(200, -500, self.time)
 			if  v[1] == self.day[i][1] and
 				v[2] == self.day[i][2] and
 				v[3] == self.day[i][3] then
-					self.tod = "wait"
+					self.todo = "wait"
 					self.next = "tonight"
+					self.tod = "day"
 					self.time = 0
 			end
-		elseif self.tod == "tonight" then
+		elseif self.todo == "tonight" then
 			v[1] = lerp(self.day[i][1], self.night[i][1], self.time)
 			v[2] = lerp(self.day[i][2], self.night[i][2], self.time)
 			v[3] = lerp(self.day[i][3], self.night[i][3], self.time)
-			self.sun.y = lerp(200, 900, self.time)
-			self.moon.y = lerp(-500, 200, self.time)
 			if  v[1] == self.night[i][1] and
 				v[2] == self.night[i][2] and
 				v[3] == self.night[i][3] then
-					self.tod = "wait"
+					self.todo = "wait"
 					self.next = "today"
+					self.tod = "night"
 					self.time = 0
 			end
 		end

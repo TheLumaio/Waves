@@ -10,11 +10,6 @@ function dutchman:encounter()
 	self.image = lg.newImage("assets/flyingdutchman.png")
 	
 	self:loadCannonMap("assets/flyingdutchman_cm.png")
-	
-	-- move to night time
-	if timeofday.tod ~= "wait" and timeofday.next ~= "today" then
-		timeofday.tod = "tonight"
-	end
 		
 	return {
 		text = {{45, 45, 45}, "The Flying Dutchman"}
@@ -31,8 +26,6 @@ function dutchman:update(dt)
 	self.rotate = lerp(self.rotate, self.to_rotate+math.cos(3*time)*0.05, self.lerpspeed)
 	self.speed = lerp(self.speed, self.to_speed, 0.2)
 	self.y = lerp(self.y, self.to_y, 0.3)
-	
-	timeofday.next = "wait"
 	
 end
 
